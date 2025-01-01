@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "rag"
+version = "0.1.0"
+description = ""
+authors = ["Luka958 <lp53523@fer.hr>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+python-decouple = "^3.8"
+qdrant-client = "^1.12.2"
+fastembed = "^0.5.0"
+ipywidgets = "^8.1.5"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
