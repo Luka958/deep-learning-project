@@ -10,7 +10,7 @@ from qdrant_client.models import (
     Fusion,
     FusionQuery
 )
-from qdrant_client.http.models import SparseVector
+from qdrant_client.http.models import SparseVector, NamedVector, NamedSparseVector
 from uuid import uuid4
 
 from .config import (
@@ -51,7 +51,7 @@ class DenseSearch(BaseModel):
             wait=True,
             points=[
                 PointStruct(
-                    id=uuid4(), 
+                    id=str(uuid4()), 
                     vector={
                         self.dense_model_config.name: dense_embedding,
                     },
@@ -74,9 +74,10 @@ class DenseSearch(BaseModel):
     ) -> list[ScoredPoint]:
         return self.qdrant_client.search(
             collection_name=collection_name,
-            query_vector={
-                self.dense_model_config.name: dense_embedding
-            },
+            query_vector=NamedVector(
+                name=self.dense_model_config.name,
+                vector=dense_embedding
+            ),
             search_params=SearchParams(
                 hnsw_ef=128
             ),
@@ -94,9 +95,7 @@ class SparseSearch(BaseModel):
     def create_collection(self, collection_name: str):
         self.qdrant_client.create_collection(
             collection_name=collection_name,
-            vectors_config={
-                self.dense_model_config.name: self.dense_model_config.vector_params
-            },
+            vectors_config={},
             sparse_vectors_config={
                 self.sparse_model_config.name: self.sparse_model_config.sparse_vector_params
             }
@@ -108,20 +107,18 @@ class SparseSearch(BaseModel):
     def upsert(
         self, 
         collection_name: str, 
-        dense_embeddings: list[ndarray], 
         sparse_embeddings: list[SparseEmbedding], 
         metadatas: list[Metadata]
     ) -> str:
-        items = zip(dense_embeddings, sparse_embeddings, metadatas)
+        items = zip(sparse_embeddings, metadatas)
         
         result = self.qdrant_client.upsert(
             collection_name=collection_name,
             wait=True,
             points=[
                 PointStruct(
-                    id=uuid4(), 
+                    id=str(uuid4()), 
                     vector={
-                        self.dense_model_config.name: dense_embedding,
                         self.sparse_model_config.name: sparse_embedding.as_object()
                     },
                     payload={
@@ -129,7 +126,7 @@ class SparseSearch(BaseModel):
                         'text': metadata.text
                     }
                 )
-                for dense_embedding, sparse_embedding, metadata in items
+                for sparse_embedding, metadata in items
             ]
         )
         
@@ -143,15 +140,19 @@ class SparseSearch(BaseModel):
     ) -> list[ScoredPoint]:
         return self.qdrant_client.search(
             collection_name=collection_name,
-            query_vector={
-                self.sparse_model_config.name: sparse_embedding
-            },
+            query_vector=NamedSparseVector(
+                name=self.sparse_model_config.name,
+                vector=SparseVector(
+                    indices=sparse_embedding.indices,
+                    values=sparse_embedding.values
+                )
+            ),
             limit=limit,
             with_payload=True
         )
 
 
-class HybridSearch(BaseModel):
+class HybridFusionSearch(BaseModel):
     qdrant_client: QdrantClient
     dense_model_config: DenseModelConfig
     sparse_model_config: SparseModelConfig
@@ -186,7 +187,7 @@ class HybridSearch(BaseModel):
             wait=True,
             points=[
                 PointStruct(
-                    id=uuid4(), 
+                    id=str(uuid4()), 
                     vector={
                         self.dense_model_config.name: dense_embedding,
                         self.sparse_model_config.name: sparse_embedding.as_object()
@@ -207,6 +208,7 @@ class HybridSearch(BaseModel):
         collection_name: str, 
         dense_embedding: ndarray, 
         sparse_embedding: SparseEmbedding, 
+        fusion_algorithm: Fusion,
         limit: int
     ) -> list[ScoredPoint]:
         return self.qdrant_client.query_points(
@@ -229,7 +231,7 @@ class HybridSearch(BaseModel):
                     limit=limit
                 )
             ],
-            query=FusionQuery(fusion=Fusion.RRF),
+            query=FusionQuery(fusion=fusion_algorithm),
             with_payload=True
         ).points
         
@@ -272,10 +274,10 @@ class HybridRerankingSearch(BaseModel):
             wait=True,
             points=[
                 PointStruct(
-                    id=uuid4(), 
+                    id=str(uuid4()), 
                     vector={
                         self.dense_model_config.name: dense_embedding,
-                        self.sparse_model_config.name: sparse_embedding,
+                        self.sparse_model_config.name: sparse_embedding.as_object(),
                         self.reranking_model_config.name: reranking_embedding
                     },
                     payload={

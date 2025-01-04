@@ -6,7 +6,7 @@ from .config import (
 from .search import (
     DenseSearch,
     SparseSearch,
-    HybridSearch, 
+    HybridFusionSearch, 
     HybridRerankingSearch
 )
 from .metadata import Metadata
@@ -18,7 +18,7 @@ __all__ = [
     'RerankingModelConfig',
     'DenseSearch',
     'SparseSearch',
-    'HybridSearch',
+    'HybridFusionSearch',
     'HybridRerankingSearch',
     'Metadata'
 ]
