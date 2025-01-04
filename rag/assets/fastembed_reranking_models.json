@@ -1,0 +1,36 @@
+[
+  {
+    "model": "colbert-ir/colbertv2.0",
+    "dim": 128,
+    "description": "Late interaction model",
+    "license": "mit",
+    "size_in_GB": 0.44,
+    "sources": {
+      "hf": "colbert-ir/colbertv2.0"
+    },
+    "model_file": "model.onnx"
+  },
+  {
+    "model": "answerdotai/answerai-colbert-small-v1",
+    "dim": 96,
+    "description": "Text embeddings, Unimodal (text), Multilingual (~100 languages), 512 input tokens truncation, 2024 year",
+    "license": "apache-2.0",
+    "size_in_GB": 0.13,
+    "sources": {
+      "hf": "answerdotai/answerai-colbert-small-v1"
+    },
+    "model_file": "vespa_colbert.onnx"
+  },
+  {
+    "model": "jinaai/jina-colbert-v2",
+    "dim": 128,
+    "description": "New model that expands capabilities of colbert-v1 with multilingual and context length of 8192, 2024 year",
+    "license": "cc-by-nc-4.0",
+    "size_in_GB": 2.24,
+    "sources": {
+      "hf": "jinaai/jina-colbert-v2"
+    },
+    "model_file": "onnx/model.onnx",
+    "additional_files": ["onnx/model.onnx_data"]
+  }
+]
