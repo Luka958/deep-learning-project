@@ -4,7 +4,7 @@ from .config import (
     RerankingModelConfig
 )
 from .search import (
-    DenseSearch,
+    DenseSearchManager,
     SparseSearch,
     HybridFusionSearch, 
     HybridRerankingSearch
@@ -16,7 +16,7 @@ __all__ = [
     'DenseModelConfig', 
     'SparseModelConfig', 
     'RerankingModelConfig',
-    'DenseSearch',
+    'DenseSearchManager',
     'SparseSearch',
     'HybridFusionSearch',
     'HybridRerankingSearch',

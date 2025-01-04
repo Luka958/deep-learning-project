@@ -21,7 +21,7 @@ from .config import (
 from .metadata import Metadata
 
 
-class DenseSearch(BaseModel):
+class DenseSearchManager(BaseModel):
     qdrant_client: QdrantClient
     dense_model_config: DenseModelConfig
     
