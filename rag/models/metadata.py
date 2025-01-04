@@ -1,6 +1,7 @@
 from pydantic import BaseModel
+from uuid import UUID
 
 
 class Metadata(BaseModel):
-    id: str
+    id: int | UUID
     text: str
