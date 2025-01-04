@@ -8,3 +8,4 @@
 - [SPLADE](https://qdrant.tech/documentation/fastembed/fastembed-splade/)
 - [sparse vectors](https://qdrant.tech/articles/sparse-vectors/)
 - [hybrid search with reranking](https://qdrant.tech/documentation/search-precision/reranking-hybrid-search/)
+- [hyperparameter optimization](https://kdb.ai/learning-hub/articles/optimizing-hyperparameters-in-hybrid-search/?utm_source=chatgpt.com)
