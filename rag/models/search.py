@@ -86,7 +86,7 @@ class DenseSearchManager(BaseModel):
         )
 
 
-class SparseSearch(BaseModel):
+class SparseSearchManager(BaseModel):
     qdrant_client: QdrantClient
     sparse_model_config: SparseModelConfig
     
@@ -152,7 +152,7 @@ class SparseSearch(BaseModel):
         )
 
 
-class HybridFusionSearch(BaseModel):
+class HybridFusionSearchManager(BaseModel):
     qdrant_client: QdrantClient
     dense_model_config: DenseModelConfig
     sparse_model_config: SparseModelConfig
@@ -236,7 +236,7 @@ class HybridFusionSearch(BaseModel):
         ).points
         
 
-class HybridRerankingSearch(BaseModel):
+class HybridRerankingSearchManager(BaseModel):
     qdrant_client: QdrantClient
     dense_model_config: DenseModelConfig
     sparse_model_config: SparseModelConfig
