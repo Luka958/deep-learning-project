@@ -1,0 +1,328 @@
+[
+  {
+    "model": "BAAI/bge-base-en",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: necessary, 2023 year.",
+    "license": "mit",
+    "size_in_GB": 0.42,
+    "sources": {
+      "hf": "Qdrant/fast-bge-base-en",
+      "url": "https://storage.googleapis.com/qdrant-fastembed/fast-bge-base-en.tar.gz"
+    },
+    "model_file": "model_optimized.onnx"
+  },
+  {
+    "model": "BAAI/bge-base-en-v1.5",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: not so necessary, 2023 year.",
+    "license": "mit",
+    "size_in_GB": 0.21,
+    "sources": {
+      "url": "https://storage.googleapis.com/qdrant-fastembed/fast-bge-base-en-v1.5.tar.gz",
+      "hf": "qdrant/bge-base-en-v1.5-onnx-q"
+    },
+    "model_file": "model_optimized.onnx"
+  },
+  {
+    "model": "BAAI/bge-large-en-v1.5",
+    "dim": 1024,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: not so necessary, 2023 year.",
+    "license": "mit",
+    "size_in_GB": 1.2,
+    "sources": {
+      "hf": "qdrant/bge-large-en-v1.5-onnx"
+    },
+    "model_file": "model.onnx"
+  },
+  {
+    "model": "BAAI/bge-small-en",
+    "dim": 384,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: necessary, 2023 year.",
+    "license": "mit",
+    "size_in_GB": 0.13,
+    "sources": {
+      "hf": "Qdrant/bge-small-en",
+      "url": "https://storage.googleapis.com/qdrant-fastembed/BAAI-bge-small-en.tar.gz"
+    },
+    "model_file": "model_optimized.onnx"
+  },
+  {
+    "model": "BAAI/bge-small-en-v1.5",
+    "dim": 384,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: not so necessary, 2023 year.",
+    "license": "mit",
+    "size_in_GB": 0.067,
+    "sources": {
+      "hf": "qdrant/bge-small-en-v1.5-onnx-q"
+    },
+    "model_file": "model_optimized.onnx"
+  },
+  {
+    "model": "BAAI/bge-small-zh-v1.5",
+    "dim": 512,
+    "description": "Text embeddings, Unimodal (text), Chinese, 512 input tokens truncation, Prefixes for queries/documents: not so necessary, 2023 year.",
+    "license": "mit",
+    "size_in_GB": 0.09,
+    "sources": {
+      "hf": "Qdrant/bge-small-zh-v1.5",
+      "url": "https://storage.googleapis.com/qdrant-fastembed/fast-bge-small-zh-v1.5.tar.gz"
+    },
+    "model_file": "model_optimized.onnx"
+  },
+  {
+    "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "dim": 384,
+    "description": "Text embeddings, Unimodal (text), Multilingual (~50 languages), 512 input tokens truncation, Prefixes for queries/documents: not necessary, 2019 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.22,
+    "sources": {
+      "hf": "qdrant/paraphrase-multilingual-MiniLM-L12-v2-onnx-Q"
+    },
+    "model_file": "model_optimized.onnx"
+  },
+  {
+    "model": "thenlper/gte-large",
+    "dim": 1024,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: not necessary, 2023 year.",
+    "license": "mit",
+    "size_in_GB": 1.2,
+    "sources": {
+      "hf": "qdrant/gte-large-onnx"
+    },
+    "model_file": "model.onnx"
+  },
+  {
+    "model": "mixedbread-ai/mxbai-embed-large-v1",
+    "dim": 1024,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.64,
+    "sources": {
+      "hf": "mixedbread-ai/mxbai-embed-large-v1"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "snowflake/snowflake-arctic-embed-xs",
+    "dim": 384,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.09,
+    "sources": {
+      "hf": "snowflake/snowflake-arctic-embed-xs"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "snowflake/snowflake-arctic-embed-s",
+    "dim": 384,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.13,
+    "sources": {
+      "hf": "snowflake/snowflake-arctic-embed-s"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "snowflake/snowflake-arctic-embed-m",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.43,
+    "sources": {
+      "hf": "Snowflake/snowflake-arctic-embed-m"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "snowflake/snowflake-arctic-embed-m-long",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), English, 2048 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.54,
+    "sources": {
+      "hf": "snowflake/snowflake-arctic-embed-m-long"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "snowflake/snowflake-arctic-embed-l",
+    "dim": 1024,
+    "description": "Text embeddings, Unimodal (text), English, 512 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 1.02,
+    "sources": {
+      "hf": "snowflake/snowflake-arctic-embed-l"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "jinaai/jina-clip-v1",
+    "dim": 768,
+    "description": "Text embeddings, Multimodal (text&image), English, Prefixes for queries/documents: not necessary, 2024 year",
+    "license": "apache-2.0",
+    "size_in_GB": 0.55,
+    "sources": {
+      "hf": "jinaai/jina-clip-v1"
+    },
+    "model_file": "onnx/text_model.onnx"
+  },
+  {
+    "model": "intfloat/multilingual-e5-large",
+    "dim": 1024,
+    "description": "Text embeddings, Unimodal (text), Multilingual (~100 languages), 512 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "mit",
+    "size_in_GB": 2.24,
+    "sources": {
+      "url": "https://storage.googleapis.com/qdrant-fastembed/fast-multilingual-e5-large.tar.gz",
+      "hf": "qdrant/multilingual-e5-large-onnx"
+    },
+    "model_file": "model.onnx",
+    "additional_files": ["model.onnx_data"]
+  },
+  {
+    "model": "sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), Multilingual (~50 languages), 384 input tokens truncation, Prefixes for queries/documents: not necessary, 2021 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 1.0,
+    "sources": {
+      "hf": "xenova/paraphrase-multilingual-mpnet-base-v2"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "Qdrant/clip-ViT-B-32-text",
+    "dim": 512,
+    "description": "Text embeddings, Multimodal (text&image), English, 77 input tokens truncation, Prefixes for queries/documents: not necessary, 2021 year",
+    "license": "mit",
+    "size_in_GB": 0.25,
+    "sources": {
+      "hf": "Qdrant/clip-ViT-B-32-text"
+    },
+    "model_file": "model.onnx"
+  },
+  {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "dim": 384,
+    "description": "Text embeddings, Unimodal (text), English, 256 input tokens truncation, Prefixes for queries/documents: not necessary, 2021 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.09,
+    "sources": {
+      "url": "https://storage.googleapis.com/qdrant-fastembed/sentence-transformers-all-MiniLM-L6-v2.tar.gz",
+      "hf": "qdrant/all-MiniLM-L6-v2-onnx"
+    },
+    "model_file": "model.onnx"
+  },
+  {
+    "model": "jinaai/jina-embeddings-v2-base-en",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), English, 8192 input tokens truncation, Prefixes for queries/documents: not necessary, 2023 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.52,
+    "sources": {
+      "hf": "xenova/jina-embeddings-v2-base-en"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "dim": 512,
+    "description": "Text embeddings, Unimodal (text), English, 8192 input tokens truncation, Prefixes for queries/documents: not necessary, 2023 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.12,
+    "sources": {
+      "hf": "xenova/jina-embeddings-v2-small-en"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "jinaai/jina-embeddings-v2-base-de",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), Multilingual (German, English), 8192 input tokens truncation, Prefixes for queries/documents: not necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.32,
+    "sources": {
+      "hf": "jinaai/jina-embeddings-v2-base-de"
+    },
+    "model_file": "onnx/model_fp16.onnx"
+  },
+  {
+    "model": "jinaai/jina-embeddings-v2-base-code",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), Multilingual (English, 30 programming languages), 8192 input tokens truncation, Prefixes for queries/documents: not necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.64,
+    "sources": {
+      "hf": "jinaai/jina-embeddings-v2-base-code"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "jinaai/jina-embeddings-v2-base-zh",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), supports mixed Chinese-English input text, 8192 input tokens truncation, Prefixes for queries/documents: not necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.64,
+    "sources": {
+      "hf": "jinaai/jina-embeddings-v2-base-zh"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "jinaai/jina-embeddings-v2-base-es",
+    "dim": 768,
+    "description": "Text embeddings, Unimodal (text), supports mixed Spanish-English input text, 8192 input tokens truncation, Prefixes for queries/documents: not necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.64,
+    "sources": {
+      "hf": "jinaai/jina-embeddings-v2-base-es"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "thenlper/gte-base",
+    "dim": 768,
+    "description": "General text embeddings, Unimodal (text), supports English only input text, 512 input tokens truncation, Prefixes for queries/documents: not necessary, 2024 year.",
+    "license": "mit",
+    "size_in_GB": 0.44,
+    "sources": {
+      "hf": "thenlper/gte-base"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "nomic-ai/nomic-embed-text-v1.5",
+    "dim": 768,
+    "description": "Text embeddings, Multimodal (text, image), English, 8192 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.52,
+    "sources": {
+      "hf": "nomic-ai/nomic-embed-text-v1.5"
+    },
+    "model_file": "onnx/model.onnx"
+  },
+  {
+    "model": "nomic-ai/nomic-embed-text-v1.5-Q",
+    "dim": 768,
+    "description": "Text embeddings, Multimodal (text, image), English, 8192 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.13,
+    "sources": {
+      "hf": "nomic-ai/nomic-embed-text-v1.5"
+    },
+    "model_file": "onnx/model_quantized.onnx"
+  },
+  {
+    "model": "nomic-ai/nomic-embed-text-v1",
+    "dim": 768,
+    "description": "Text embeddings, Multimodal (text, image), English, 8192 input tokens truncation, Prefixes for queries/documents: necessary, 2024 year.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.52,
+    "sources": {
+      "hf": "nomic-ai/nomic-embed-text-v1"
+    },
+    "model_file": "onnx/model.onnx"
+  }
+]

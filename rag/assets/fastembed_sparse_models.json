@@ -1,0 +1,79 @@
+[
+  {
+    "model": "prithivida/Splade_PP_en_v1",
+    "vocab_size": 30522,
+    "description": "Independent Implementation of SPLADE++ Model for English.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.532,
+    "sources": {
+      "hf": "Qdrant/SPLADE_PP_en_v1"
+    },
+    "model_file": "model.onnx"
+  },
+  {
+    "model": "prithvida/Splade_PP_en_v1",
+    "vocab_size": 30522,
+    "description": "Independent Implementation of SPLADE++ Model for English.",
+    "license": "apache-2.0",
+    "size_in_GB": 0.532,
+    "sources": {
+      "hf": "Qdrant/SPLADE_PP_en_v1"
+    },
+    "model_file": "model.onnx"
+  },
+  {
+    "model": "Qdrant/bm42-all-minilm-l6-v2-attentions",
+    "vocab_size": 30522,
+    "description": "Light sparse embedding model, which assigns an importance score to each token in the text",
+    "license": "apache-2.0",
+    "size_in_GB": 0.09,
+    "sources": {
+      "hf": "Qdrant/all_miniLM_L6_v2_with_attentions"
+    },
+    "model_file": "model.onnx",
+    "additional_files": ["stopwords.txt"],
+    "requires_idf": true
+  },
+  {
+    "model": "Qdrant/bm25",
+    "description": "BM25 as sparse embeddings meant to be used with Qdrant",
+    "license": "apache-2.0",
+    "size_in_GB": 0.01,
+    "sources": {
+      "hf": "Qdrant/bm25"
+    },
+    "model_file": "mock.file",
+    "additional_files": [
+      "arabic.txt",
+      "azerbaijani.txt",
+      "basque.txt",
+      "bengali.txt",
+      "catalan.txt",
+      "chinese.txt",
+      "danish.txt",
+      "dutch.txt",
+      "english.txt",
+      "finnish.txt",
+      "french.txt",
+      "german.txt",
+      "greek.txt",
+      "hebrew.txt",
+      "hinglish.txt",
+      "hungarian.txt",
+      "indonesian.txt",
+      "italian.txt",
+      "kazakh.txt",
+      "nepali.txt",
+      "norwegian.txt",
+      "portuguese.txt",
+      "romanian.txt",
+      "russian.txt",
+      "slovene.txt",
+      "spanish.txt",
+      "swedish.txt",
+      "tajik.txt",
+      "turkish.txt"
+    ],
+    "requires_idf": true
+  }
+]
