@@ -1,6 +1,10 @@
 ## Install
 `poetry install --no-update`
 
+## Database
+- create free cluster at [qdrant cloud](https://cloud.qdrant.io/)
+- or setup Docker container from [qdrant docker](https://hub.docker.com/r/qdrant/qdrant)
+
 ## Environment
 - `QDRANT_URL=`
 - `QDRANT_API_KEY=`
