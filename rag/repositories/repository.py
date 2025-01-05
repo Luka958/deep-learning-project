@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from fastembed.sparse import SparseEmbedding
 from numpy import ndarray
 from qdrant_client import QdrantClient
@@ -8,21 +7,22 @@ from qdrant_client.models import (
     Prefetch,
     SearchParams,
     Fusion,
-    FusionQuery,
-    OptimizersConfigDiff
+    FusionQuery
 )
 from qdrant_client.http.models import SparseVector, NamedVector, NamedSparseVector
+from pydantic import BaseModel
 from uuid import uuid4
 
-from .config import (
+from rag.models import (
     DenseModelConfig,
     SparseModelConfig,
-    RerankingModelConfig
+    RerankingModelConfig,
+    Metadata
 )
-from .metadata import Metadata
+from rag.base import BaseRepository
 
 
-class DenseSearchManager(BaseModel):
+class DenseSearchRepository(BaseModel, BaseRepository):
     qdrant_client: QdrantClient
     dense_model_config: DenseModelConfig
     
@@ -36,14 +36,16 @@ class DenseSearchManager(BaseModel):
             }
         )
     
-    def delete_collection(self, collection_name: str):
-        self.qdrant_client.delete_collection(collection_name)
+    def delete_collection(self, collection_name: str) -> bool:
+        return self.qdrant_client.delete_collection(collection_name)
         
     def upload_points(
         self, 
         collection_name: str, 
-        dense_embeddings: list[ndarray], 
-        metadatas: list[Metadata]
+        metadatas: list[Metadata],
+        dense_embeddings: list[ndarray] = None,
+        sparse_embeddings: list[SparseEmbedding] = None,
+        reranking_embeddings: list[ndarray] = None
     ):
         items = zip(dense_embeddings, metadatas)
         
@@ -67,9 +69,13 @@ class DenseSearchManager(BaseModel):
     
     def search(
         self, 
-        collection_name: str, 
-        dense_embedding: ndarray, 
-        limit: int
+        collection_name: str,
+        limit: int,
+        prefetch_limit: int = None,
+        fusion_algorithm: Fusion = None,
+        dense_embedding: ndarray = None, 
+        sparse_embedding: SparseEmbedding = None,
+        reranking_embedding: ndarray = None
     ) -> list[ScoredPoint]:
         return self.qdrant_client.search(
             collection_name=collection_name,
@@ -85,7 +91,7 @@ class DenseSearchManager(BaseModel):
         )
 
 
-class SparseSearchManager(BaseModel):
+class SparseSearchRepository(BaseModel, BaseRepository):
     qdrant_client: QdrantClient
     sparse_model_config: SparseModelConfig
     
@@ -100,14 +106,16 @@ class SparseSearchManager(BaseModel):
             }
         )
     
-    def delete_collection(self, collection_name: str):
-        self.qdrant_client.delete_collection(collection_name)
+    def delete_collection(self, collection_name: str) -> bool:
+        return self.qdrant_client.delete_collection(collection_name)
         
     def upload_points(
         self, 
         collection_name: str, 
-        sparse_embeddings: list[SparseEmbedding], 
-        metadatas: list[Metadata]
+        metadatas: list[Metadata],
+        dense_embeddings: list[ndarray] = None,
+        sparse_embeddings: list[SparseEmbedding] = None,
+        reranking_embeddings: list[ndarray] = None
     ):
         items = zip(sparse_embeddings, metadatas)
         
@@ -131,9 +139,13 @@ class SparseSearchManager(BaseModel):
     
     def search(
         self, 
-        collection_name: str, 
-        sparse_embedding: SparseEmbedding, 
-        limit: int
+        collection_name: str,
+        limit: int,
+        prefetch_limit: int = None,
+        fusion_algorithm: Fusion = None,
+        dense_embedding: ndarray = None, 
+        sparse_embedding: SparseEmbedding = None,
+        reranking_embedding: ndarray = None
     ) -> list[ScoredPoint]:
         return self.qdrant_client.search(
             collection_name=collection_name,
@@ -149,7 +161,7 @@ class SparseSearchManager(BaseModel):
         )
 
 
-class HybridFusionSearchManager(BaseModel):
+class HybridFusionSearchRepository(BaseModel, BaseRepository):
     qdrant_client: QdrantClient
     dense_model_config: DenseModelConfig
     sparse_model_config: SparseModelConfig
@@ -167,15 +179,16 @@ class HybridFusionSearchManager(BaseModel):
             }
         )
     
-    def delete_collection(self, collection_name: str):
-        self.qdrant_client.delete_collection(collection_name)
+    def delete_collection(self, collection_name: str) -> bool:
+        return self.qdrant_client.delete_collection(collection_name)
         
     def upload_points(
         self, 
         collection_name: str, 
-        dense_embeddings: list[ndarray], 
-        sparse_embeddings: list[SparseEmbedding], 
-        metadatas: list[Metadata]
+        metadatas: list[Metadata],
+        dense_embeddings: list[ndarray] = None,
+        sparse_embeddings: list[SparseEmbedding] = None,
+        reranking_embeddings: list[ndarray] = None
     ):
         items = zip(dense_embeddings, sparse_embeddings, metadatas)
         
@@ -200,11 +213,13 @@ class HybridFusionSearchManager(BaseModel):
     
     def search(
         self, 
-        collection_name: str, 
-        dense_embedding: ndarray, 
-        sparse_embedding: SparseEmbedding, 
-        fusion_algorithm: Fusion,
-        limit: int
+        collection_name: str,
+        limit: int,
+        prefetch_limit: int = None,
+        fusion_algorithm: Fusion = None,
+        dense_embedding: ndarray = None, 
+        sparse_embedding: SparseEmbedding = None,
+        reranking_embedding: ndarray = None
     ) -> list[ScoredPoint]:
         return self.qdrant_client.query_points(
             collection_name=collection_name,
@@ -231,7 +246,7 @@ class HybridFusionSearchManager(BaseModel):
         ).points
         
 
-class HybridRerankingSearchManager(BaseModel):
+class HybridRerankingSearchRepository(BaseModel, BaseRepository):
     qdrant_client: QdrantClient
     dense_model_config: DenseModelConfig
     sparse_model_config: SparseModelConfig
@@ -251,16 +266,16 @@ class HybridRerankingSearchManager(BaseModel):
             }
         )
     
-    def delete_collection(self, collection_name: str):
-        self.qdrant_client.delete_collection(collection_name)
+    def delete_collection(self, collection_name: str) -> bool:
+        return self.qdrant_client.delete_collection(collection_name)
         
     def upload_points(
         self, 
         collection_name: str, 
-        dense_embeddings: list[ndarray],
-        sparse_embeddings: list[SparseEmbedding],
-        reranking_embeddings: list[ndarray],
-        metadatas: list[Metadata]
+        metadatas: list[Metadata],
+        dense_embeddings: list[ndarray] = None,
+        sparse_embeddings: list[SparseEmbedding] = None,
+        reranking_embeddings: list[ndarray] = None
     ):
         items = zip(dense_embeddings, sparse_embeddings, reranking_embeddings, metadatas)
         
@@ -288,12 +303,13 @@ class HybridRerankingSearchManager(BaseModel):
     
     def search(
         self, 
-        collection_name: str, 
-        dense_embedding: ndarray, 
-        sparse_embedding: SparseEmbedding,
-        reranking_embedding: ndarray,
-        prefetch_limit: int,
-        limit: int
+        collection_name: str,
+        limit: int,
+        prefetch_limit: int = None,
+        fusion_algorithm: Fusion = None,
+        dense_embedding: ndarray = None, 
+        sparse_embedding: SparseEmbedding = None,
+        reranking_embedding: ndarray = None
     ) -> list[ScoredPoint]:
         return self.qdrant_client.query_points(
             collection_name=collection_name,
