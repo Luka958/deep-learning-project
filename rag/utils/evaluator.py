@@ -7,32 +7,36 @@ from pandas import DataFrame
 from qdrant_client.models import Fusion
 from ranx import evaluate
 from rag.base import BaseRepository
-from rag.utils import get_qrels, get_run
+from rag.models.metadata import Metadata
 
-from .metadata import Metadata
+from .ranx import get_qrels, get_run
 
 
 class Evaluator:
     def __init__(
         self,
+        dfs: tuple[DataFrame, DataFrame, DataFrame]
+    ):
+        self.corpus_df, self.queries_df, self.qrels_df = dfs
+        self.qrels = get_qrels(self.qrels_df)
+    
+    def setup(
+        self,
         collection_name: str,
-        dfs: tuple[DataFrame, DataFrame, DataFrame],
         repository: BaseRepository,
         dense_model: TextEmbedding | None = None,
         sparse_model: SparseTextEmbedding | None = None,
         reranking_model: LateInteractionTextEmbedding | None = None
-        
     ):
+        if hasattr(self, 'collection_name') and self.repository.collection_exists(self.collection_name):
+            self.repository.delete_collection(self.collection_name)
+            
         self.repository = repository
         self.dense_model = dense_model
         self.sparse_model = sparse_model
         self.reranking_model = reranking_model
         self.collection_name = collection_name
-        self.corpus_df, self.queries_df, self.qrels_df = dfs
         
-        self.qrels = get_qrels(self.qrels_df)
-    
-    def setup(self):
         # metadata
         corpus_texts: list[str] = self.corpus_df['text'].values.tolist()
         metadatas = [
@@ -93,4 +97,12 @@ class Evaluator:
         return evaluate(self.qrels, run, metrics=metrics)
     
     def clear(self) -> bool:
-        return self.repository.delete_collection(self.collection_name)
+        success = self.repository.delete_collection(self.collection_name)
+        
+        self.collection_name = None
+        self.repository = None
+        self.dense_model = None
+        self.sparse_model = None
+        self.reranking_model = None
+        
+        return success

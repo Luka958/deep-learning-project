@@ -1,11 +1,14 @@
 from abc import ABC, abstractmethod
 from fastembed import SparseEmbedding
 from numpy import ndarray
+from qdrant_client import QdrantClient
 from qdrant_client.models import Fusion
 from qdrant_client.http.models import ScoredPoint
 from rag.models import Metadata
 
 class BaseRepository(ABC):
+    qdrant_client: QdrantClient
+    
     @abstractmethod
     def create_collection(self, collection_name: str) -> bool: 
         pass
@@ -13,6 +16,9 @@ class BaseRepository(ABC):
     @abstractmethod
     def delete_collection(self, collection_name: str) -> bool:
         pass
+    
+    def collection_exists(self, collection_name: str) -> bool: 
+        return self.qdrant_client.collection_exists(collection_name=collection_name)
     
     @abstractmethod
     def upload_points(
@@ -37,3 +43,4 @@ class BaseRepository(ABC):
         reranking_embedding: ndarray = None
     ) -> list[ScoredPoint]:
         pass
+    
