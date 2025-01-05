@@ -49,7 +49,7 @@ class Evaluator:
         # index
         self.manager.create_collection(self.collection_name)
         
-        return self.manager.upsert(
+        return self.manager.upload_points(
             self.collection_name,
             dense_embeddings,
             metadatas

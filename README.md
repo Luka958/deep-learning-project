@@ -2,9 +2,10 @@
 `poetry install --no-update`
 
 ## Environment
-- `QDRANT_URL`
-- `QDRANT_API_KEY`
-- `NVIDIA_API_KEY`
+- `QDRANT_URL=`
+- `QDRANT_API_KEY=`
+- `NVIDIA_API_KEY=`
+- `CUDA=true`
 
 ## Basics
 - [hyperparameter optimization by KDB.AI](https://kdb.ai/learning-hub/articles/optimizing-hyperparameters-in-hybrid-search/?utm_source=chatgpt.com)
