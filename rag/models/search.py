@@ -281,7 +281,9 @@ class HybridRerankingSearchManager(BaseModel):
                     }
                 )
                 for dense_embedding, sparse_embedding, reranking_embedding, metadata in items
-            ]
+            ],
+            batch_size=20,
+            parallel=6
         )
     
     def search(
