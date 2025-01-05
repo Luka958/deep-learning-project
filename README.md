@@ -16,3 +16,4 @@
 - [hybrid search with reranking](https://qdrant.tech/documentation/search-precision/reranking-hybrid-search/)
 - [**hybrid search new API**](https://qdrant.tech/articles/hybrid-search/)
 - [ColBERT](https://qdrant.tech/documentation/fastembed/fastembed-colbert/)
+- [bulk upload](https://qdrant.tech/documentation/database-tutorials/bulk-upload/)
